@@ -42,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
             charViews[i].setTextColor(Color.WHITE);
             charViews[i].setBackgroundResource(R.drawable.letter_bg);
             wordLayout.addView(charViews[i]);
+            //commit
         }
 
 
