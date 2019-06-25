@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="words">
+        <item>ANDROID</item>
+        <item>COMPUTADORA</item>
+        <item>CELULAR</item>
+        <item>IPAD</item>
+    </string-array>
+</resources>
