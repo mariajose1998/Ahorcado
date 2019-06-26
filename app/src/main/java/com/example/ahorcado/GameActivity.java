@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,11 +18,18 @@ public class GameActivity extends AppCompatActivity {
     private String currWord;
     private TextView[] charViews;
     private LinearLayout wordLayout;
+    private LetterAdapter adapter;
+    private GridView gridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         words=getResources().getStringArray(R.array.words);
+        wordLayout=findViewById(R.id.words);
+        gridView=findViewById(R.id.letters);
+        random=new Random();
+
+        playGame();
     }
 
     private void playGame(){
@@ -36,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         for (int i=0; i<currWord.length(); i++)
         {
             charViews[i]=new TextView(this);
-            charViews[i].setText(currWord.charAt(i));
+            charViews[i].setText(""+currWord.charAt(i));
             charViews[i].setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             charViews[i].setGravity(Gravity.CENTER);
             charViews[i].setTextColor(Color.WHITE);
@@ -44,6 +52,8 @@ public class GameActivity extends AppCompatActivity {
             wordLayout.addView(charViews[i]);
             //commit
         }
+        adapter=new LetterAdapter(this);
+        gridView.setAdapter(adapter);
 
 
     }
