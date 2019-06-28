@@ -1,11 +1,16 @@
 package com.example.ahorcado;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +25,11 @@ public class GameActivity extends AppCompatActivity {
     private LinearLayout wordLayout;
     private LetterAdapter adapter;
     private GridView gridView;
+    private int numCorr;
+    private int numChars;
+    private ImageView[]parts;
+    private int sizeParts=6;
+    private int currPart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +38,13 @@ public class GameActivity extends AppCompatActivity {
         wordLayout=findViewById(R.id.words);
         gridView=findViewById(R.id.letters);
         random=new Random();
+        parts=new ImageView[sizeParts];
+        parts[0] = findViewById(R.id.head);
+        parts[1] = findViewById(R.id.body);
+        parts[2] = findViewById(R.id.armLeft);
+        parts[3] = findViewById(R.id.armRight);
+        parts[4] = findViewById(R.id.legLeft);
+        parts[5] = findViewById(R.id.legRight);
 
         playGame();
     }
@@ -40,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
         currWord=newWord;
 
         charViews=new TextView[currWord.length()];
-
+        wordLayout.removeAllViews();
         for (int i=0; i<currWord.length(); i++)
         {
             charViews[i]=new TextView(this);
@@ -54,7 +71,79 @@ public class GameActivity extends AppCompatActivity {
         }
         adapter=new LetterAdapter(this);
         gridView.setAdapter(adapter);
+        numCorr=0;
+        currPart=0;
+        numChars=currWord.length();
 
+        for (int i=0; i<sizeParts;i++){
+            parts[i].setVisibility(View.INVISIBLE);
+        }
+    }
 
+    public void letterPressed(View view){
+        String letter=((TextView)view).getText().toString();
+        char letterChar=letter.charAt(0);
+
+        view.setEnabled(false);
+        boolean correct=false;
+        for(int i=0;i<currWord.length();i++)
+        {
+            if (currWord.charAt(i)==letterChar){
+                correct=true;
+                numCorr++;
+                charViews[i].setTextColor(Color.BLACK);
+            }
+        }
+        if (correct){
+            if(numCorr==numChars){
+                disableButtons();
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle("Ganaste");
+                builder.setMessage("Felicidades!\n\n La respuesta era: \n\n" + currWord);
+                builder.setPositiveButton("Jugar de nuevo", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GameActivity.this.playGame();
+                    }
+                });
+
+                builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GameActivity.this.finish();
+                    }
+                });
+                builder.show();
+            }
+        }
+        else if(currPart<sizeParts){
+            parts[currPart].setVisibility(View.VISIBLE);
+            currPart++;
+        }
+        else {
+            disableButtons();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("PERDISTE");
+            builder.setMessage("Tu perdiste!\n\n La respuesta era: \n\n" + currWord);
+            builder.setPositiveButton("Jugar de nuevo", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    GameActivity.this.playGame();
+                }
+            });
+
+            builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    GameActivity.this.finish();
+                }
+            });
+            builder.show();
+        }
+    }
+    public void disableButtons(){
+        for(int i=0; i<gridView.getChildCount();i++){
+            gridView.getChildAt(i).setEnabled(false);
+        }
     }
 }

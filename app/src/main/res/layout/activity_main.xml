@@ -13,9 +13,9 @@
         android:onClick="play"
         android:text="@string/JUGAR"
         android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:background="@android:color/darker_gray"
         android:textSize="30sp"
-        android:visibility="visible"
-        tools:text="@string/JUGAR"
-        tools:visibility="visible" />
+        tools:text="@string/JUGAR" />
 
 </RelativeLayout>
