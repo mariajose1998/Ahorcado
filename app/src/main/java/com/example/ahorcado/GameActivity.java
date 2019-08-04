@@ -124,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
             disableButtons();
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("PERDISTE");
-            builder.setMessage("Tu perdiste!\n\n La respuesta era: \n\n" + currWord);
+            builder.setMessage("Perdiste!\n\n La respuesta era: \n\n" + currWord);
             builder.setPositiveButton("Jugar de nuevo", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

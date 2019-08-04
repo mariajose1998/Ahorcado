@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="words">
-        <item>ANDROID</item>
-        <item>COMPUTADORA</item>
-        <item>CELULAR</item>
-        <item>IPAD</item>
+        <item>AFGANISTAN</item>
+        <item>ALBANIA</item>
+        <item>ALEMANIA</item>
+        <item>ANDORRA</item>
+        <item>ARGENTINA</item>
+        <item>BELICE</item>
+        <item>CANADA</item>
+        <item>COLOMBIA</item>
+        <item>DINAMARCA</item>
+        <item>GRECIA</item>
+        <item>ECUADOR</item>
+        <item>FRANCIA</item>
+        <item>GUATEMALA</item>
+        <item>HONDURAS</item>
+        <item>HUNGRIA</item>
+        <item>JAPON</item>
+        <item>CHINA</item>
+        <item>KUWAIT</item>
+        <item>LETONIA</item>
+        <item>MARRUECOS</item>
+        <item>MADAGASCAR</item>
+        <item>MOZAMBIQUE</item>
+        <item>PAKISTAN</item>
+        <item>PALESTINA</item>
+        <item>PORTUGAL</item>
+        <item>RUMANIA</item>
+        <item>SUIZA</item>
+        <item>TAIWAN</item>
+        <item>UCRANIA</item>
+        <item>YEMEN</item>
+        <item>VIETNAM</item>
+        <item>ZIMBABUE</item>
     </string-array>
 </resources>
